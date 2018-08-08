@@ -14,9 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require 'jsonsl/version'
-require 'jsonsl/error'
-require 'jsonsl_ext'
-
 module JSONSL
+  class Error < StandardError
+    attr_reader :code
+  end
 end

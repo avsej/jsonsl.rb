@@ -39,4 +39,16 @@ Rake::TestTask.new(:test) do |t|
   t.test_files = FileList['test/**/*_test.rb']
 end
 
+require "rake/extensiontask"
+
+def gemspec
+  @clean_gemspec ||= eval(File.read(File.expand_path('jsonsl.gemspec', File.dirname(__FILE__))))
+end
+
+Rake::ExtensionTask.new("jsonsl_ext", gemspec) do |ext|
+  ext.ext_dir = "ext/jsonsl_ext"
+  CLEAN.include "#{ext.lib_dir}/*.#{RbConfig::CONFIG['DLEXT']}"
+end
+Rake::Task['test'].prerequisites.unshift('compile')
+
 task :default => :test
