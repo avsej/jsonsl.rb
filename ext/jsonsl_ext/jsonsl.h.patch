@@ -1,0 +1,14 @@
+--- jsonsl.h.orig	2018-08-08 22:32:20.688856662 +0300
++++ jsonsl.h	2018-08-08 22:34:01.616759720 +0300
+@@ -12,6 +12,11 @@
+ #ifndef JSONSL_H_
+ #define JSONSL_H_
+ 
++#include <ruby.h>
++#define JSONSL_STATE_USER_FIELDS \
++	VALUE val; \
++	VALUE pkey;
++
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <stddef.h>
