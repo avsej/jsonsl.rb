@@ -127,6 +127,9 @@ static void jsl_parser_row_pop_callback(jsonsl_t jsn, jsonsl_action_t action, st
     if (state->val == jsl_sym_rows) {
         jsn->action_callback_POP = jsl_parser_cover_pop_callback;
         jsn->action_callback_PUSH = NULL;
+        if (parser->rowcount == 0) {
+            parser->header_len = state->pos_begin + 1;
+        }
         return;
     }
 
