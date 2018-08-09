@@ -248,12 +248,13 @@ static VALUE jsl_parser_inspect(VALUE self)
 static VALUE jsl_parser_feed(VALUE self, VALUE data)
 {
     jsl_PARSER *parser = DATA_PTR(self);
-    size_t old_len = RSTRING_LEN(parser->buffer);
+    size_t old_len;
 
     if (NIL_P(parser->buffer)) {
-        jsl_raise_msg("unable to feed completed parser");
+        return self;
     }
     Check_Type(data, T_STRING);
+    old_len = RSTRING_LEN(parser->buffer);
     rb_str_buf_append(parser->buffer, data);
     jsonsl_feed(parser->jsn, RSTRING_PTR(parser->buffer) + old_len, RSTRING_LEN(data));
 
