@@ -138,7 +138,7 @@ static void jsl_parser_row_pop_callback(jsonsl_t jsn, jsonsl_action_t action, st
     if (state->type == JSONSL_T_SPECIAL) {
         len--;
     }
-    rb_funcall(parser->proc, jsl_id_call, 2, INT2FIX(parser->rowcount), rb_str_new(ptr, len));
+    rb_funcall(parser->proc, jsl_id_call, 2, rb_str_new(ptr, len), INT2FIX(parser->rowcount));
     parser->rowcount++;
 
     (void)action;
